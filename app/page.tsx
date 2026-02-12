@@ -1,19 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import dynamic from 'next/dynamic';
 import { Product, LCAResult } from './types';
 import { calculateLCA } from './lib/lca-calculator';
 import ProductForm from './components/ProductForm';
 import LCAVisualization from './components/LCAVisualization';
 import SupplierDirectory from './components/SupplierDirectory';
+import Model3DViewer from './components/Model3DViewer';
 import { Package, Leaf, TrendingDown, Users } from 'lucide-react';
-
-// Dynamic import to avoid SSR issues with Three.js
-const Model3DViewer = dynamic(() => import('./components/Model3DViewer'), {
-  ssr: false,
-  loading: () => <div className="w-full h-96 bg-gray-900 rounded-lg flex items-center justify-center text-white">Loading 3D Viewer...</div>
-});
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'create' | 'evaluate' | 'suppliers' | 'learn'>('create');
