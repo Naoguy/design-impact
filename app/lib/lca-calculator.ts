@@ -145,7 +145,7 @@ export function generateRecommendations(
   return recommendations;
 }
 
-export function compareProducts(products: Product[]): any {
+export function compareProducts(products: Product[]): Array<{ product: Product; lca: LCAResult }> {
   return products.map(product => ({
     product,
     lca: calculateLCA(product)

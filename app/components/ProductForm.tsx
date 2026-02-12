@@ -27,15 +27,19 @@ export default function ProductForm({ onSubmit, initialData }: ProductFormProps)
     setComponents([...components, newComponent]);
   };
 
-  const updateComponent = (index: number, field: string, value: any) => {
+  const updateComponent = (index: number, field: keyof Component, value: string | number) => {
     const updated = [...components];
     if (field === 'material') {
-      updated[index].material = materials.find(m => m.id === value) || materials[0];
+      updated[index].material = materials.find(m => m.id === value as string) || materials[0];
     } else if (field === 'manufacturingProcess') {
-      updated[index].manufacturingProcess = value;
-      updated[index].manufacturingEnergy = manufacturingProcesses[value];
-    } else {
-      (updated[index] as any)[field] = value;
+      updated[index].manufacturingProcess = value as string;
+      updated[index].manufacturingEnergy = manufacturingProcesses[value as string];
+    } else if (field === 'name') {
+      updated[index].name = value as string;
+    } else if (field === 'weight') {
+      updated[index].weight = value as number;
+    } else if (field === 'quantity') {
+      updated[index].quantity = value as number;
     }
     setComponents(updated);
   };
